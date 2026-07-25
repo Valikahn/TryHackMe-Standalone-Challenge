@@ -1,1 +1,1 @@
-# TryHackMe-Learn-Challenges
+# Standalone-Challenge
