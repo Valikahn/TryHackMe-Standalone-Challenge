@@ -1,4 +1,4 @@
-# TryHackMe Standalone Challenge Writeups ![Repository Status](https://img.shields.io/badge/repository-active-brightgreen?style=for-the-badge)
+# Standalone Challenge Writeups ![Repository Status](https://img.shields.io/badge/repository-active-brightgreen?style=for-the-badge)
 
 ![Banner](./IMAGES/standalone_challenges_img.png?raw=true)
 
