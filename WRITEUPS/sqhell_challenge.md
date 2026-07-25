@@ -2,13 +2,13 @@
 
 ![Banner](./../IMAGES/sqhell_img.png?raw=true)
 
-**Pathway:** *N/A* | **Section:** *N/A* | **Challenge:** *[SQHell](https://tryhackme.com/room/sqhell)*
+**Section:** *Learn* | **Challenge:** *[SQHell](https://tryhackme.com/room/sqhell)*
 
 > [!IMPORTANT]
 >
 > **Working write-up notice:** This was a working and verified write-up at the time of writing on **25 July 2026**.
 >
-> **Spoiler warning:** This write-up documents the exploitation chain, although exact SQL injection payloads, database-specific values and flag codes are not shown.
+> **Spoiler warning:** This write-up documents the exploitation chain, although exact challenge-specific payloads, database names, extracted values and flag codes are not shown.
 >
 > **Please note:** The IP addresses used during the lab were dynamically allocated by TryHackMe. The attack was performed from my own Kali Linux VM using OpenVPN to connect to the TryHackMe VPN.
 >
@@ -16,7 +16,7 @@
 >
 > - `<TARGET_IP>` represents the IP address allocated to the target machine.
 > - `<TUN0_IP>` represents the IP address assigned to the Kali Linux `tun0` interface.
-> - `<REDACTED>` represents exact payloads, database names, internal values or other challenge giveaways.
+> - `<REDACTED>` represents exact payloads, database names, extracted values or other challenge giveaways.
 > - `THM{....}` represents a redacted TryHackMe flag.
 >
 > **License:** Unless otherwise stated, all write-ups and documentation in this repository are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Any original scripts or code snippets are provided under the [MIT Licence](https://opensource.org/license/mit/).
@@ -25,24 +25,24 @@
 
 This write-up was made possible by the hard work of the TryHackMe team and the wider cyber security community, who continue to create practical and engaging learning environments for aspiring security professionals.
 
-[TryHackMe](https://tryhackme.com/) is an online cyber security training platform that provides hands-on labs covering penetration testing, networking, web application security, privilege escalation and defensive security.
-
-Its rooms allow learners to develop practical technical skills within controlled and authorised environments.
+[TryHackMe](https://tryhackme.com/) is an online cyber security training platform that provides hands-on labs covering penetration testing, networking, web application security, privilege escalation and defensive security. Its rooms allow learners to develop practical technical skills within controlled and authorised environments.
 
 ## Lab Summary
 
-SQHell is a web application security challenge focused entirely on SQL injection. The objective was to recover five flags by identifying and exploiting several different injection styles across the application.
+SQHell is a web application security challenge focused on identifying and exploiting several forms of SQL injection.
+
+The objective was to recover five flags from different application functions. Each vulnerable endpoint required a slightly different approach, including authentication bypass, UNION-based extraction, time-based blind injection, HTTP header injection and nested SQL injection.
 
 The successful attack chain involved:
 
 1. Confirming VPN connectivity, routing and local hostname resolution.
-2. Enumerating the exposed SSH and HTTP services.
-3. Discovering the `/login`, `/post`, `/register`, `/user` and `/terms-and-conditions` routes.
-4. Bypassing the login form with an authentication SQL injection to recover Flag 1.
-5. Exploiting a time-based blind SQL injection in the `X-Forwarded-For` header to recover Flag 2.
-6. Exploiting a time-based blind SQL injection in the registration username availability checker to recover Flag 3.
-7. Exploiting a nested SQL injection in the user profile function to recover Flag 4.
-8. Exploiting a UNION-based SQL injection in the post viewer to recover Flag 5.
+2. Enumerating SSH and HTTP services.
+3. Discovering the `/login`, `/post`, `/register`, `/register/user-check`, `/user` and `/terms-and-conditions` routes.
+4. Bypassing the login form and recovering Flag 1.
+5. Exploiting the `/post` identifier with a UNION query and recovering Flag 5.
+6. Following the IP logging clue and exploiting the `X-Forwarded-For` header to recover Flag 2.
+7. Exploiting the registration username availability checker to recover Flag 3.
+8. Chaining a nested SQL injection through the user profile function to recover Flag 4.
 
 Confirmed lab details used during the walkthrough:
 
@@ -78,6 +78,8 @@ The expected result showed traffic leaving through `tun0` and using `<TUN0_IP>` 
 <TARGET_IP> via <REDACTED> dev tun0 src <TUN0_IP>
 ```
 
+This confirmed that traffic to the target was routed through `tun0` using `<TUN0_IP>`.
+
 > [!TIP]
 >
 > When using your own Kali Linux VM, the `/etc/hosts` file is especially important in TryHackMe challenges. Many rooms depend on hostname-based routing, virtual hosts, redirects, cookies or application logic that may not work correctly when the expected hostname is missing.
@@ -111,15 +113,15 @@ The principal tools and utilities used during the challenge were:
 - Dirsearch, Gobuster, Feroxbuster and FFUF for web content discovery.
 - Firefox for interacting with the web application.
 - cURL for manually testing SQL injection behaviour.
-- SQLMap for confirming and extracting data from blind SQL injection points.
+- SQLMap for confirming and extracting data through blind SQL injection.
 
-Click [HERE](https://github.com/Valikahn/TryHackMe-Jr-Penetration-Tester#tools-commonly-used) to return to the repository README. The `Tools Commonly Used` section contains links to tools used throughout the pathway.
+Click [HERE](https://github.com/Valikahn/TryHackMe-Learn-Challenges#tools-commonly-used) to return to the repository README. The `Tools Commonly Used` section contains links to tools used throughout the pathway.
 
 ## Initial Enumeration
 
-### Connectivity and Routing
+### Connectivity and Hostname Resolution
 
-The hostname mapping and VPN route were checked before touching the application:
+The hostname mapping and VPN route were checked before interacting with the application:
 
 ```bash
 getent hosts sqhell.thm
@@ -130,10 +132,13 @@ ping -c 4 sqhell.thm
 
 The output confirmed that:
 
-- `sqhell.thm` resolved to `<TARGET_IP>`.
-- Traffic to the target was routed through `tun0`.
-- The Kali VPN source address was `<TUN0_IP>`.
-- The target responded over the TryHackMe VPN.
+```text
+sqhell.thm -> <TARGET_IP>
+Route interface -> tun0
+Source address -> <TUN0_IP>
+```
+
+This ruled out local DNS and VPN routing problems before web enumeration began.
 
 ### Port and Service Discovery
 
@@ -163,7 +168,7 @@ SSH:  OpenSSH on Ubuntu
 HTTP: nginx on Ubuntu
 ```
 
-SSH was not immediately useful because no credentials had been recovered. The investigation therefore focused on the web application.
+SSH was not immediately useful because no credentials had been recovered. The investigation therefore focused on the HTTP service.
 
 ### Web Technology Identification
 
@@ -184,7 +189,7 @@ Ubuntu Linux
 
 ### Web Content Discovery
 
-Several content-discovery tools were used to cross-check the available routes.
+Several content-discovery tools were used to cross-check the available routes:
 
 ```bash
 dirsearch -u sqhell.thm/
@@ -207,6 +212,14 @@ feroxbuster \
   --redirects
 ```
 
+```bash
+ffuf \
+  -u 'http://sqhell.thm/FUZZ' \
+  -w /usr/share/wordlists/dirb/big.txt \
+  -mc all \
+  -fc 404
+```
+
 The important routes were:
 
 ```text
@@ -218,46 +231,100 @@ The important routes were:
 /terms-and-conditions
 ```
 
-The `/post` and `/user` routes both returned:
+Direct requests to `/post` and `/user` returned:
 
 ```text
 Missing parameter: id
 ```
 
-The registration page also revealed a client-side request to:
+The registration page revealed a client-side request to:
 
 ```text
 /register/user-check?username=
 ```
 
-The Terms and Conditions page contained the important clue that the application logged visitors' IP addresses.
+The Terms and Conditions page contained the important clue:
+
+```text
+We log your IP address for analytics purposes
+```
 
 ## Exploits
 
-### Flag 1 - Login Authentication Bypass
+The flags were not discovered in numerical order; they were recovered according to the sequence in which each vulnerable endpoint was identified and successfully exploited.
+
+### Flag 1 - SQL Injection Authentication Bypass
 
 The first flag was found through the `/login` page.
 
-The login form accepted a conventional SQL injection authentication bypass in the username field. The exact payload is intentionally redacted:
+The login form accepted a conventional SQL injection authentication bypass in the username field. The exact values are intentionally redacted:
 
 ```text
-Username: <REDACTED>
-Password: <REDACTED>
+Username: admin’ or ‘1’=’1’
+Password: BLANK
 ```
 
-The payload terminated the original username string, introduced a condition that evaluated as true and commented out the remaining password comparison.
+The injected username terminated the original string, introduced a condition that evaluated as true and commented out the remainder of the password comparison.
 
-Successful authentication returned the first flag:
+Check out [Injection Attacks](https://tryhackme.com/module/injection-attacks) if you need a reminder.
+
+This should return a successful authentication followed with a login (kinda):
 
 ```text
 THM{....}
 ```
 
-This confirmed that the login query was being constructed from unsanitised user input rather than using a prepared statement.
+This confirmed that the application was constructing the login query with unsanitised user input rather than using a prepared statement.
 
-### Flag 2 - SQL Injection in the X-Forwarded-For Header
+### Flag 5 - UNION-Based SQL Injection in the Post Viewer
 
-The Terms and Conditions page stated that visitor IP addresses were logged for analytics. This suggested that an HTTP header used to represent the client's IP address might be stored or processed by the database.
+The second flag found during the assessment was Flag 5.
+
+The `/post` route required an `id` parameter:
+
+```text
+/post?id=<VALUE>
+```
+
+A UNION-based test established that the underlying query returned four columns and that the third column appeared in the visible post body:
+
+```bash
+curl -sG 'http://sqhell.thm/post' \
+  --data-urlencode 'id=<REDACTED>'
+```
+
+The response displayed the database user:
+
+```text
+<REDACTED>@localhost
+```
+
+This confirmed three important details:
+
+- The `id` parameter was injectable.
+- The query accepted four UNION columns.
+- The third selected column was rendered in the response.
+
+The visible column was then used to select the flag value from the local `flag` table:
+
+```bash
+curl -sG 'http://sqhell.thm/post' \
+  --data-urlencode 'id=<REDACTED>'
+```
+
+The response returned:
+
+```text
+THM{....}
+```
+
+Using a non-existent original record prevented a normal post from obscuring the injected UNION result.
+
+### Flag 2 - Time-Based Blind Injection in X-Forwarded-For
+
+The third flag found was Flag 2.
+
+The Terms and Conditions page stated that visitor IP addresses were logged for analytics. This suggested that a client address header might be inserted into a database query.
 
 The `X-Forwarded-For` header was tested with SQLMap:
 
@@ -272,7 +339,7 @@ sqlmap \
   --batch
 ```
 
-SQLMap identified the custom header as vulnerable to time-based blind SQL injection:
+SQLMap identified the custom header as vulnerable:
 
 ```text
 Parameter: X-Forwarded-For
@@ -280,17 +347,19 @@ Type: time-based blind
 Back-end DBMS: MySQL
 ```
 
-The `flag` table contained one record:
+The target did not directly print the queried value. SQLMap instead used conditional database delays and measured the response time to infer the data one character at a time.
+
+The extracted record was:
 
 ```text
 THM{....}
 ```
 
-No clear-text response directly exposed the database value. SQLMap inferred each character by comparing response delays caused by conditional database sleep operations.
-
 ### Flag 3 - Registration Username Availability Check
 
-The registration page performed an asynchronous username availability request:
+The fourth flag found was Flag 3.
+
+The registration page performed an asynchronous username availability check:
 
 ```text
 /register/user-check?username=<VALUE>
@@ -309,7 +378,7 @@ sqlmap \
   --batch
 ```
 
-SQLMap confirmed another time-based blind SQL injection in the `username` parameter:
+SQLMap confirmed another time-based blind injection:
 
 ```text
 Parameter: username
@@ -317,15 +386,17 @@ Type: time-based blind
 Back-end DBMS: MySQL
 ```
 
-The recovered table contained:
+The endpoint returned JSON indicating whether a username was available, but did not directly expose arbitrary query results. SQLMap again relied on conditional delays to recover the table contents.
+
+The extracted record was:
 
 ```text
 THM{....}
 ```
 
-As with Flag 2, the value was extracted by measuring conditional response delays rather than reading it directly from the application's output.
-
 ### Flag 4 - Nested SQL Injection in the User Profile
+
+The final flag found was Flag 4.
 
 The `/user` endpoint accepted an `id` parameter:
 
@@ -333,16 +404,23 @@ The `/user` endpoint accepted an `id` parameter:
 /user?id=<VALUE>
 ```
 
-A UNION test showed that the query returned three columns and that injected values could influence the displayed user record:
+A preliminary UNION test showed that the outer user query returned three columns:
 
 ```bash
 curl -sG 'http://sqhell.thm/user' \
   --data-urlencode 'id=<REDACTED>'
 ```
 
-The response displayed controlled values in the user details, confirming the first stage of the injection.
+The response displayed attacker-controlled values in the user details:
 
-The application then reused one of those database-supplied values in a second query. This allowed a second SQL injection statement to be placed inside the result of the first injection.
+```text
+User ID: <REDACTED>
+Username: <REDACTED>
+```
+
+This confirmed that the result of the injected outer query was being processed by the application.
+
+The application then reused one of those returned values in a second database query used to retrieve the user's posts. A second SQL injection statement was therefore embedded inside the data returned by the first query.
 
 The final nested request is intentionally redacted:
 
@@ -351,200 +429,208 @@ curl -sG 'http://sqhell.thm/user' \
   --data-urlencode 'id=<REDACTED>'
 ```
 
-The inner query selected the flag value from the challenge's `flag` table. The result appeared as an additional post title in the user profile:
+The inner query selected the flag value from the `flag` table. The result appeared as an additional post title in the user's post list:
 
 ```text
 THM{....}
 ```
 
-This was a nested, or second-order, SQL injection because attacker-controlled data produced by one query was subsequently interpreted as SQL by another query.
-
-### Flag 5 - UNION-Based SQL Injection in the Post Viewer
-
-The `/post` route required an `id` parameter:
-
-```text
-/post?id=<VALUE>
-```
-
-A UNION-based test established the correct column count and identified which output column was visible:
-
-```bash
-curl -sG 'http://sqhell.thm/post' \
-  --data-urlencode 'id=<REDACTED>'
-```
-
-The response displayed the current database user in the post body:
-
-```text
-<REDACTED>@localhost
-```
-
-The visible column was then used to retrieve the value from the `flag` table:
-
-```bash
-curl -sG 'http://sqhell.thm/post' \
-  --data-urlencode 'id=<REDACTED>'
-```
-
-The post body returned:
-
-```text
-THM{....}
-```
-
-The invalid original record identifier prevented a normal post from obscuring the injected UNION result.
+This was a nested, or second-order, SQL injection because attacker-controlled data produced by one SQL query was later interpreted as part of another SQL statement.
 
 ### Decoding and Data Transformation
 
-No Base64, hexadecimal, URL-safe encoding or custom cipher had to be manually decoded during this challenge.
+No Base64, hexadecimal, URL-safe token, cipher text or custom encoding had to be manually decoded during this challenge.
 
-cURL's `--data-urlencode` option was used to safely encode SQL injection strings into query parameters. This prevented spaces, comment characters and other reserved URL characters from being misinterpreted by the shell or HTTP client.
-
-For example:
+cURL's `--data-urlencode` option was used to encode SQL injection strings safely into query parameters:
 
 ```bash
 curl -sG 'http://sqhell.thm/<REDACTED>' \
   --data-urlencode '<PARAMETER>=<REDACTED>'
 ```
 
+This prevented spaces, comment characters, quotation marks and other reserved URL characters from being interpreted incorrectly by the shell or HTTP client.
+
+SQLMap performed its own request encoding and timing analysis during blind extraction. No recovered value required additional decoding after extraction.
+
 ## Full Attack Chain Recap
 
-1. Connected the Kali VM to the TryHackMe VPN.
-2. Added `<TARGET_IP> sqhell.thm` to `/etc/hosts`.
-3. Confirmed hostname resolution, VPN routing and the `<TUN0_IP>` address.
-4. Identified SSH on port 22 and Nginx HTTP on port 80.
-5. Enumerated the principal web routes.
-6. Bypassed the `/login` authentication query and recovered Flag 1.
-7. Followed the IP logging clue from the Terms and Conditions page.
-8. Exploited time-based blind SQL injection in `X-Forwarded-For` and recovered Flag 2.
-9. Exploited time-based blind SQL injection in the registration username checker and recovered Flag 3.
-10. Confirmed a three-column UNION injection in `/user`.
-11. Chained a nested SQL injection through the application's second database query and recovered Flag 4.
-12. Confirmed a four-column UNION injection in `/post`.
-13. Placed the flag column into the visible post-body field and recovered Flag 5.
+### 1. VPN and Hostname Preparation
+The allocated target and `tun0` addresses were confirmed. The hostname `sqhell.thm` was mapped to `<TARGET_IP>` in `/etc/hosts`, ensuring that the application was accessed through its expected local hostname.
 
-The flags were recovered in this order:
+### 2. Service Discovery
+RustScan and Nmap identified SSH on port 22 and HTTP on port 80. The web application was served by Nginx on Ubuntu.
+
+### 3. Web Technology and Route Enumeration
+WhatWeb identified Bootstrap and jQuery. Directory enumeration discovered `/login`, `/post`, `/register` and `/user`, while recursive discovery also identified `/terms-and-conditions` and `/register/user-check`.
+
+### 4. Login Authentication Bypass
+The `/login` form was vulnerable to SQL injection in the username field. A true condition was introduced and the remaining password comparison was commented out.
+
+Successful authentication exposed the first recovered flag:
 
 ```text
-Flag 1: THM{....}
-Flag 2: THM{....}
-Flag 3: THM{....}
-Flag 4: THM{....}
-Flag 5: THM{....}
+THM{....}
+```
+
+### 5. Post Query Column Discovery
+The `/post` endpoint accepted an injectable `id` value. A UNION test established that the original query returned four columns and that the third column appeared in the post body.
+
+### 6. UNION-Based Flag Extraction
+The third visible column was replaced with the `flag` field from the local flag table. This returned the second flag found during the assessment, which was challenge Flag 5:
+
+```text
+THM{....}
+```
+
+### 7. IP Logging Clue
+The Terms and Conditions page stated that visitor IP addresses were logged. This pointed towards a forwarding header being processed by the application.
+
+### 8. X-Forwarded-For Injection
+SQLMap tested a custom injection marker inside `X-Forwarded-For`. The header was confirmed as vulnerable to MySQL time-based blind SQL injection.
+
+### 9. Blind Extraction of Flag 2
+Conditional database delays were used to infer the contents of the relevant flag table. The third flag found during the assessment was challenge Flag 2:
+
+```text
+THM{....}
+```
+
+### 10. Registration Endpoint Analysis
+The registration form's JavaScript revealed `/register/user-check`, which accepted a `username` query parameter and returned a JSON availability response.
+
+### 11. Blind Extraction of Flag 3
+SQLMap confirmed the username parameter as time-based blind injectable and extracted the next flag. The fourth flag found during the assessment was challenge Flag 3:
+
+```text
+THM{....}
+```
+
+### 12. User Query Manipulation
+The `/user` endpoint accepted a three-column UNION query. Controlled values appeared in the user profile, proving that the outer database result could be manipulated.
+
+### 13. Nested SQL Injection
+A second SQL injection was embedded within a value returned by the first query. The application reused that value while querying the user's posts, causing the inner SQL statement to execute.
+
+### 14. Final Flag Recovery
+The nested query inserted the flag value into the post list. The final flag found during the assessment was challenge Flag 4:
+
+```text
+THM{....}
 ```
 
 ## Key Lessons
 
-### SQL Injection Is Not One Single Technique
+SQHell demonstrated several useful penetration-testing and defensive-security lessons:
 
-The challenge demonstrated several distinct SQL injection patterns:
+- Confirm VPN routing and hostname resolution before troubleshooting application behaviour.
+- Keep `/etc/hosts` tidy when using a personal Kali VM for TryHackMe rooms.
+- Enumerate both visible application routes and client-side JavaScript requests.
+- A disabled registration button does not mean that supporting registration endpoints are inactive.
+- Authentication forms remain a common place to test for basic SQL injection.
+- UNION testing should establish the column count and identify which columns are visible before attempting data extraction.
+- An invalid original record identifier can make injected UNION results easier to observe.
+- HTTP headers are user-controlled input unless trusted infrastructure explicitly rewrites and validates them.
+- Application text and legal pages can contain genuine technical clues.
+- Blind SQL injection can still disclose complete database records even when no query output is printed.
+- Time-based extraction depends on stable response timing and may require patience.
+- Data retrieved from a database must not automatically be treated as trusted.
+- Second-order injection can occur when one query's result is inserted into another dynamically constructed query.
+- SQLMap is effective for blind extraction, but manual testing remains important for understanding the vulnerable application logic.
+- Public write-ups should explain the methodology without publishing exact flags or unnecessary challenge giveaways.
 
-- Authentication bypass.
-- UNION-based data extraction.
-- Time-based blind extraction.
-- Header-based injection.
-- Nested or second-order injection.
-
-Finding one injectable field did not automatically solve the whole room. Each endpoint processed input differently and required a different exploitation method.
-
-### Headers Are Still User-Controlled Input
-
-The `X-Forwarded-For` header may look like trusted infrastructure metadata, but clients can usually supply it directly unless a reverse proxy overwrites and validates it.
-
-Any header that reaches database logic must be treated with the same suspicion as form values, cookies and URL parameters.
-
-### Client-Side Restrictions Are Not Security Controls
-
-The registration button stated that registrations were closed, but the page still exposed a live username-checking endpoint.
-
-Disabling a button in the browser does not remove the underlying server-side functionality.
-
-### Blind Injection Requires Patience and Stable Timing
-
-Time-based extraction depends on comparing response delays. Network instability can create false results or make extraction considerably slower.
-
-SQLMap's timing calibration helped reduce the delay once stable responses had been observed.
-
-### Second-Order Injection Can Hide Behind Apparently Safe Data
-
-The nested injection worked because a value returned from one database query was later inserted into another query without safe parameterisation.
-
-Data does not become trustworthy simply because it came from the application's own database.
-
-### Keep `/etc/hosts` Under Control
-
-For hostname-dependent rooms, an incorrect or duplicated hosts entry can derail enumeration and exploitation before the real challenge even begins.
-
-Cleaning old entries after each room keeps troubleshooting simple and avoids wasting time on stale mappings.
+The most important technical lesson was that every input boundary must be treated independently. The login form, numeric identifiers, registration checker and forwarding header all reached SQL logic through different paths, yet each became exploitable because the application failed to parameterise its queries consistently.
 
 ## Remediation Notes
 
-### Use Prepared Statements Everywhere
+### Authentication Query Security
 
-All database queries should use parameterised statements. User-controlled data must never be concatenated into SQL strings.
+- Replace string-built login queries with prepared statements.
+- Bind the username and password as data rather than SQL syntax.
+- Store passwords using a modern adaptive password hash such as Argon2id or bcrypt.
+- Return a generic authentication failure message regardless of whether the username exists.
+- Add rate limiting and monitoring to the login endpoint.
+- Alert on quotation marks, SQL comments and repeated authentication anomalies.
 
-This applies to:
+### Post and User Identifier Handling
 
-- Login form fields.
-- Numeric record identifiers.
-- Registration and availability checks.
-- Values read from HTTP headers.
-- Data retrieved from earlier database queries.
+- Convert record identifiers to integers before they reach database logic.
+- Reject identifiers containing whitespace, quotes, comments or other non-numeric characters.
+- Use prepared statements even after type validation.
+- Return `404 Not Found` for missing records rather than passing raw values into SQL.
+- Avoid exposing database error details to the client.
+- Apply object-level authorisation before returning user or post data.
 
-### Validate Numeric Identifiers
+### Registration Endpoint Security
 
-The `id` parameters should be converted to integers and rejected if they contain anything other than the expected numeric format.
+- Remove the username availability endpoint if registration is disabled.
+- Require appropriate anti-automation controls where the endpoint remains necessary.
+- Parameterise the username lookup query.
+- Normalise usernames before comparison.
+- Apply length and character restrictions appropriate to the application's account policy.
+- Avoid returning unnecessary detail that can support account enumeration.
+- Monitor repeated high-volume availability checks.
 
-Input validation is not a replacement for prepared statements, but it provides a useful additional control.
+### Proxy Header Security
 
-### Treat Proxy Headers as Untrusted
+- Treat `X-Forwarded-For` as untrusted unless the request came through a known reverse proxy.
+- Remove client-supplied forwarding headers at the network edge.
+- Configure the trusted proxy to insert a validated client address.
+- Parameterise every analytics and logging query.
+- Store IP addresses in a suitable typed field rather than concatenating them into SQL.
+- Restrict which application components can write to analytics tables.
+- Alert on SQL syntax, comments or abnormal lengths in forwarding headers.
 
-The application should not trust arbitrary client-supplied `X-Forwarded-For` values.
+### Blind SQL Injection Resistance
 
-A trusted reverse proxy should:
+- Use parameterised queries for every database operation.
+- Avoid relying on hidden output as a security measure.
+- Apply database statement timeouts to limit deliberate sleep-based queries.
+- Monitor repeated requests with regular delay patterns.
+- Rate-limit endpoints that do not require high request volumes.
+- Suppress detailed database errors from client responses.
+- Use a web application firewall only as an additional control, not as a replacement for secure coding.
 
-1. Remove inbound spoofed forwarding headers.
-2. Insert its own validated client address.
-3. Ensure the application only accepts forwarding metadata from known proxy systems.
+### Second-Order Injection Prevention
 
-The logging query must still use a prepared statement.
+- Treat data retrieved from a database as untrusted when it is reused.
+- Never concatenate stored values into a later SQL statement.
+- Parameterise each query at the moment it is executed.
+- Validate stored data against its expected type and format.
+- Review workflows where one query result influences another query.
+- Include second-order injection cases in application security testing.
+- Avoid dynamic SQL unless there is a clear, reviewed and unavoidable requirement.
 
-### Remove or Protect Unused Endpoints
+### Database Privilege Management
 
-If account registration is disabled, supporting endpoints such as username availability checks should be removed or protected.
+- Give the web application only the database permissions it requires.
+- Use separate database accounts for authentication, content, registration and analytics where practical.
+- Prevent public-facing features from querying unrelated databases and tables.
+- Remove access to sensitive tables from low-risk application functions.
+- Rotate database credentials after suspected compromise.
+- Store database credentials in a dedicated secrets-management system.
+- Log and review unusual cross-database access attempts.
 
-Unused application functionality increases the attack surface and can expose vulnerabilities even when the main feature appears unavailable.
+### Operational Hygiene
 
-### Avoid Reusing Database Values in Dynamic SQL
-
-Values retrieved from a database should not be inserted into another SQL statement through string concatenation.
-
-Second-order injection is prevented by parameterising every query at the point where it is executed, regardless of where the input originated.
-
-### Apply Least-Privilege Database Permissions
-
-Each application component should use a database account with only the permissions it requires.
-
-A vulnerable read-only feature should not be able to query unrelated tables or databases containing challenge flags, credentials or sensitive records.
-
-### Improve Monitoring
-
-Security monitoring should detect:
-
-- SQL comment sequences in input.
-- Repeated conditional sleep queries.
-- Suspicious UNION statements.
-- Unusual values in forwarding headers.
-- Repeated requests with small timing variations.
-- Automated extraction patterns associated with tools such as SQLMap.
-
-Monitoring should support prevention and investigation, not replace secure query construction.
+- Keep `/etc/hosts` limited to active lab mappings.
+- Remove stale challenge entries after each room.
+- Maintain separate working directories for scan output and extracted evidence.
+- Record the target, hostname and `tun0` details at the beginning of each engagement.
+- Validate each stage of an attack chain before moving to the next.
+- Preserve relevant terminal output so findings can be reproduced accurately.
 
 ## Disclaimer
 
-This write-up documents activity performed in an authorised TryHackMe lab environment.
+This writeup is intended solely for education, training and documentation of an authorised TryHackMe lab.
 
-The techniques described are intended for education, defensive learning and lawful security testing only. They must not be used against systems without explicit permission from the system owner.
+All tools, commands, payloads and post-exploitation techniques described here were used within a controlled environment provided by TryHackMe. Permission to interact with the target was granted by the platform owner and operator as part of the room.
 
-The exact target address, VPN address, SQL payloads, database-specific values and flags have been redacted to avoid publishing direct challenge answers.
+The tools and methods documented in this walkthrough represent one successful approach. They are not the only possible techniques, and alternative tools or workflows may produce the same result.
+
+Never test, scan, exploit or access a system without clear and explicit authorisation from its owner.
+
+---
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/v4l1k4hn)  
+
+**Powered on ☕ made with ❤️ by [V4L1K4HN](https://tryhackme.com/p/V4L1K4HN)**  
+⭐ If this project is useful, consider starring it on GitHub.
