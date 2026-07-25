@@ -2,13 +2,13 @@
 
 ![Banner](./../IMAGES/sqhell_img.png?raw=true)
 
-**Section:** *Learn* | **Challenge:** *[SQHell](https://tryhackme.com/room/sqhell)*
+**Category:** *Standalone Challenge* | **Section:** *TryHackMe Challenges* | **Challenge:** *[SQHell](https://tryhackme.com/room/sqhell)*  
 
 > [!IMPORTANT]
 >
-> **Working write-up notice:** This was a working and verified write-up at the time of writing on **25 July 2026**.
+> **Working writeup notice:** This was a working and verified writeup at the time of writing on **25 July 2026**.
 >
-> **Spoiler warning:** This write-up documents the exploitation chain, although exact challenge-specific payloads, database names, extracted values and flag codes are not shown.
+> **Spoiler warning:** This writeup documents the exploitation chain, although exact challenge-specific payloads, database names, extracted values and flag codes are not shown.
 >
 > **Please note:** The IP addresses used during the lab were dynamically allocated by TryHackMe. The attack was performed from my own Kali Linux VM using OpenVPN to connect to the TryHackMe VPN.
 >
@@ -19,11 +19,11 @@
 > - `<REDACTED>` represents exact payloads, database names, extracted values or other challenge giveaways.
 > - `THM{....}` represents a redacted TryHackMe flag.
 >
-> **License:** Unless otherwise stated, all write-ups and documentation in this repository are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Any original scripts or code snippets are provided under the [MIT Licence](https://opensource.org/license/mit/).
+> **License:** Unless otherwise stated, all writeups and documentation in this repository are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Any original scripts or code snippets are provided under the [MIT Licence](https://opensource.org/license/mit/).
 
 ## About TryHackMe
 
-This write-up was made possible by the hard work of the TryHackMe team and the wider cyber security community, who continue to create practical and engaging learning environments for aspiring security professionals.
+This writeup was made possible by the hard work of the TryHackMe team and the wider cyber security community, who continue to create practical and engaging learning environments for aspiring security professionals.
 
 [TryHackMe](https://tryhackme.com/) is an online cyber security training platform that provides hands-on labs covering penetration testing, networking, web application security, privilege escalation and defensive security. Its rooms allow learners to develop practical technical skills within controlled and authorised environments.
 
@@ -536,7 +536,7 @@ SQHell demonstrated several useful penetration-testing and defensive-security le
 - Data retrieved from a database must not automatically be treated as trusted.
 - Second-order injection can occur when one query's result is inserted into another dynamically constructed query.
 - SQLMap is effective for blind extraction, but manual testing remains important for understanding the vulnerable application logic.
-- Public write-ups should explain the methodology without publishing exact flags or unnecessary challenge giveaways.
+- Public writeups should explain the methodology without publishing exact flags or unnecessary challenge giveaways.
 
 The most important technical lesson was that every input boundary must be treated independently. The login form, numeric identifiers, registration checker and forwarding header all reached SQL logic through different paths, yet each became exploitable because the application failed to parameterise its queries consistently.
 
