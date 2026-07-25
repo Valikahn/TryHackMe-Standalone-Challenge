@@ -3,7 +3,7 @@
 ![Banner](./IMAGES/standalone_challenges_img.png?raw=true)
 
 ![License](https://img.shields.io/badge/License-CC_BY_4.0-green)
-![Writeups](https://img.shields.io/badge/Published_Writeups-0-blue)
+![Writeups](https://img.shields.io/badge/Published_Writeups-1-blue)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/v4l1k4hn)
 ![GitHub User's stars](https://img.shields.io/github/stars/valikahn?style=flat&logo=github)
 ![Discord](https://img.shields.io/discord/521382216299839518?style=flat&logo=discord&color=purple)
