@@ -93,13 +93,11 @@ There is no promise that challenges will be completed in difficulty order, relea
 
 | Status | Meaning |
 | --- | --- |
-| ![Planned](https://img.shields.io/badge/Planned-lightgrey) | The challenge has been selected, but work or documentation has not started. |
-| ![In Progress](https://img.shields.io/badge/In%20Progress-yellow) | The challenge is being completed, researched or documented. |
-| ![Review](https://img.shields.io/badge/Under%20Review-blue) | The writeup is complete but is being checked for accuracy, clarity and sensitive content. |
+| ![Planned](https://img.shields.io/badge/Planned-lightgrey) | The room has been selected but documentation has not started. |
+| ![In Progress](https://img.shields.io/badge/In%20Progress-yellow) | The room is currently being completed and documented. |
 | ![Complete](https://img.shields.io/badge/Complete-brightgreen) | The writeup has been published. |
-| ![Revisit](https://img.shields.io/badge/Revisit-purple) | The challenge was completed, but the writeup may be expanded or approached again. |
-| ![Issue Reported](https://img.shields.io/badge/Issue-Reported-orange) | A technical issue affecting the challenge has been identified or reported. |
-| ![Archived](https://img.shields.io/badge/Archived-red) | The writeup is retained for reference but is no longer actively maintained. |
+| ![Archived](https://img.shields.io/badge/Archived-red) | The room or writeup is no longer actively maintained. |
+| ![Issue_Reported](https://img.shields.io/badge/Issue-Reported-orange) | A lab or room issue has been encountered and reported. |
 
 ## Tools Commonly Used
 
