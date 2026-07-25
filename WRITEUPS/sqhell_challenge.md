@@ -2,7 +2,7 @@
 
 ![Banner](./../IMAGES/sqhell_img.png?raw=true)
 
-**Category:** *Standalone Challenge* | **Section:** *TryHackMe Challenges* | **Challenge:** *[SQHell](https://tryhackme.com/room/sqhell)*  
+**Category:** *Standalone Challenge* | **Section:** *[TryHackMe Challenges](https://tryhackme.com/challenges)* | **Challenge:** *[SQHell](https://tryhackme.com/room/sqhell)*  
 
 > [!IMPORTANT]
 >
