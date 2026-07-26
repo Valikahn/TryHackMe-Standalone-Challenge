@@ -91,6 +91,10 @@ There is no promise that challenges will be completed in difficulty order, relea
 | 5 | [TryPwnMe Two](https://tryhackme.com/room/trypwnmetwo) | ![Hard](https://img.shields.io/badge/Hard-red) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 6 | [Matryoshka](https://tryhackme.com/room/matryoshka) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/matryoshka_challenge.md) |
 | 7 | [Kitty](https://tryhackme.com/room/kitty) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Review](https://img.shields.io/badge/Under%20Review-blue) |
+| 8 | [White Rabbit](https://tryhackme.com/room/whiterabbit) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
+| 9 | [IronHold](https://tryhackme.com/room/ironhold) | ![Hard](https://img.shields.io/badge/Hard-red) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
+| 10 | [Message to Garcia](https://tryhackme.com/room/messagetogarcia) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
+| 11 | [Carrotbane of My Existence](https://tryhackme.com/room/sq3-aoc2025-bk3vvbcgiT) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 
 TryPwnMe One
 > [!NOTE]
