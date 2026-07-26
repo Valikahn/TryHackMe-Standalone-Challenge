@@ -84,12 +84,13 @@ There is no promise that challenges will be completed in difficulty order, relea
 
 | No. | Challenge | Difficulty | Status |
 | ---: | --- | :---: | :---: |
-| 1 | SQHell | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/sqhell_challenge.md) |
-| 2 | Attacktive Directory | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/attacktive_directory_challenge.md) |
-| 3 | That's The Ticket | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Issue_Reported](https://img.shields.io/badge/Issue-Reported-orange) |
-| 4 | TryPwnMe One | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/trypwnmeone_challenge.md) |
-| 5 | TryPwnMe Two | ![Hard](https://img.shields.io/badge/Hard-red) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
-| 6 | Matryoshka | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/matryoshka_challenge.md) |
+| 1 | [SQHell](https://tryhackme.com/room/sqhell) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/sqhell_challenge.md) |
+| 2 | [Attacktive Directory](https://tryhackme.com/room/attacktivedirectory) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/attacktive_directory_challenge.md) |
+| 3 | [That's The Ticket](https://tryhackme.com/room/thatstheticket) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Issue_Reported](https://img.shields.io/badge/Issue-Reported-orange) |
+| 4 | [TryPwnMe One](https://tryhackme.com/room/trypwnmeone) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/trypwnmeone_challenge.md) |
+| 5 | [TryPwnMe Two](https://tryhackme.com/room/trypwnmetwo) | ![Hard](https://img.shields.io/badge/Hard-red) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
+| 6 | [Matryoshka](https://tryhackme.com/room/matryoshka) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/matryoshka_challenge.md) |
+| 7 | [Kitty](https://tryhackme.com/room/kitty) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Review](https://img.shields.io/badge/Under%20Review-blue) |
 
 TryPwnMe One
 > [!NOTE]
