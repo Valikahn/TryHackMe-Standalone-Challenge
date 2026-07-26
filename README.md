@@ -87,7 +87,10 @@ There is no promise that challenges will be completed in difficulty order, relea
 | 1 | SQHell | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/sqhell_challenge.md) |
 | 2 | Attacktive Directory | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/attacktive_directory_challenge.md) |
 | 3 | That's The Ticket | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Issue_Reported](https://img.shields.io/badge/Issue-Reported-orange) |
+| 4 | TryPwnMe One | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Review](https://img.shields.io/badge/Under%20Review-blue) |
+| 5 | TryPwnMe Two | ![Hard](https://img.shields.io/badge/Hard-red) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 
+TryPwnMe One
 > [!NOTE]
 > New entries will be added when a challenge has been completed, reviewed, sanitised and prepared for publication. Repository activity may vary depending on study priorities and available time.
 
@@ -98,8 +101,10 @@ There is no promise that challenges will be completed in difficulty order, relea
 | ![Planned](https://img.shields.io/badge/Planned-lightgrey) | The room has been selected but documentation has not started. |
 | ![In Progress](https://img.shields.io/badge/In%20Progress-yellow) | The room is currently being completed and documented. |
 | ![Complete](https://img.shields.io/badge/Complete-brightgreen) | The writeup has been published. |
-| ![Archived](https://img.shields.io/badge/Archived-red) | The room or writeup is no longer actively maintained. |
+| ![Review](https://img.shields.io/badge/Under%20Review-blue) | The writeup is complete but is being checked for accuracy, clarity and sensitive content. |
+| ![Revisit](https://img.shields.io/badge/Revisit-purple) | The challenge was completed, but the writeup may be expanded or approached again. |
 | ![Issue_Reported](https://img.shields.io/badge/Issue-Reported-orange) | A lab or room issue has been encountered and reported. |
+| ![Archived](https://img.shields.io/badge/Archived-red) | The room or writeup is no longer actively maintained. |
 
 ## Tools Commonly Used
 
