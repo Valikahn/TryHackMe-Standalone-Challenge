@@ -89,6 +89,7 @@ There is no promise that challenges will be completed in difficulty order, relea
 | 3 | That's The Ticket | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Issue_Reported](https://img.shields.io/badge/Issue-Reported-orange) |
 | 4 | TryPwnMe One | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Review](https://img.shields.io/badge/Under%20Review-blue) |
 | 5 | TryPwnMe Two | ![Hard](https://img.shields.io/badge/Hard-red) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
+| 6 | Matryoshka | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/matryoshka_challenge.md) |
 
 TryPwnMe One
 > [!NOTE]
