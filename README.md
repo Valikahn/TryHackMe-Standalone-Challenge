@@ -3,7 +3,7 @@
 ![Banner](./IMAGES/standalone_challenges_img.png?raw=true)
 
 ![License](https://img.shields.io/badge/License-CC_BY_4.0-green)
-![Writeups](https://img.shields.io/badge/Published_Writeups-2-blue)
+![Writeups](https://img.shields.io/badge/Published_Writeups-4-blue)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/v4l1k4hn)
 ![GitHub User's stars](https://img.shields.io/github/stars/valikahn?style=flat&logo=github)
 ![Discord](https://img.shields.io/discord/521382216299839518?style=flat&logo=discord&color=purple)
@@ -87,7 +87,7 @@ There is no promise that challenges will be completed in difficulty order, relea
 | 1 | SQHell | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/sqhell_challenge.md) |
 | 2 | Attacktive Directory | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/attacktive_directory_challenge.md) |
 | 3 | That's The Ticket | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Issue_Reported](https://img.shields.io/badge/Issue-Reported-orange) |
-| 4 | TryPwnMe One | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Review](https://img.shields.io/badge/Under%20Review-blue) |
+| 4 | TryPwnMe One | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/trypwnmeone_challenge.md) |
 | 5 | TryPwnMe Two | ![Hard](https://img.shields.io/badge/Hard-red) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 6 | Matryoshka | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/matryoshka_challenge.md) |
 
