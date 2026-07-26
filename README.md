@@ -95,6 +95,8 @@ There is no promise that challenges will be completed in difficulty order, relea
 | 9 | [IronHold](https://tryhackme.com/room/ironhold) | ![Hard](https://img.shields.io/badge/Hard-red) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 10 | [Message to Garcia](https://tryhackme.com/room/messagetogarcia) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 11 | [Carrotbane of My Existence](https://tryhackme.com/room/sq3-aoc2025-bk3vvbcgiT) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
+| 12 | [Volt Typhoon](https://tryhackme.com/room/volttyphoon) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
+| 13 | [ExfilNode](https://tryhackme.com/room/exfilnode) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 
 TryPwnMe One
 > [!NOTE]
