@@ -86,6 +86,7 @@ There is no promise that challenges will be completed in difficulty order, relea
 | ---: | --- | :---: | :---: |
 | 1 | SQHell | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/sqhell_challenge.md) |
 | 2 | Attacktive Directory | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/attacktive_directory_challenge.md) |
+| 3 | That's The Ticket | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Issue_Reported](https://img.shields.io/badge/Issue-Reported-orange) |
 
 > [!NOTE]
 > New entries will be added when a challenge has been completed, reviewed, sanitised and prepared for publication. Repository activity may vary depending on study priorities and available time.
