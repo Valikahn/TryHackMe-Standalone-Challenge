@@ -808,8 +808,8 @@ The central lesson was that two individually weak design choices became critical
 >
 > Sadly, she passed away on 4 October 2022. She was part of our family for 13 years, and we miss her very much."
 
-[Kitty](https://cdn-images.tryhackme.com/user-uploads/618b3fa52f0acc0061fb0172/room-content/81793ab4d64e533256fca09a76b38141.jpg)
-[Kitty](https://cdn-images.tryhackme.com/user-uploads/618b3fa52f0acc0061fb0172/room-content/10f09fc0eb0f5e375055b87ff36578d0.jpg)
+![Kitty](https://cdn-images.tryhackme.com/user-uploads/618b3fa52f0acc0061fb0172/room-content/81793ab4d64e533256fca09a76b38141.jpg)
+![Kitty](https://cdn-images.tryhackme.com/user-uploads/618b3fa52f0acc0061fb0172/room-content/10f09fc0eb0f5e375055b87ff36578d0.jpg)
 
 ## Disclaimer
 
