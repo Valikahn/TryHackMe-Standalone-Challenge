@@ -3,7 +3,7 @@
 ![Banner](./IMAGES/standalone_challenges_img.png?raw=true)
 
 ![License](https://img.shields.io/badge/License-CC_BY_4.0-green)
-![Writeups](https://img.shields.io/badge/Published_Writeups-6-blue)
+![Writeups](https://img.shields.io/badge/Published_Writeups-7-blue)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/v4l1k4hn)
 ![GitHub User's stars](https://img.shields.io/github/stars/valikahn?style=flat&logo=github)
 ![Discord](https://img.shields.io/discord/521382216299839518?style=flat&logo=discord&color=purple)
@@ -88,7 +88,7 @@ There is no promise that challenges will be completed in difficulty order, relea
 | 2 | [Attacktive Directory](https://tryhackme.com/room/attacktivedirectory) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/attacktive_directory_challenge.md) |
 | 3 | [That's The Ticket](https://tryhackme.com/room/thatstheticket) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Issue_Reported](https://img.shields.io/badge/Issue-Reported-orange) |
 | 4 | [TryPwnMe One](https://tryhackme.com/room/trypwnmeone) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/trypwnme_one_challenge.md) |
-| 5 | [TryPwnMe Two](https://tryhackme.com/room/trypwnmetwo) | ![Hard](https://img.shields.io/badge/Hard-red) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
+| 5 | [TryPwnMe Two](https://tryhackme.com/room/trypwnmetwo) | ![Hard](https://img.shields.io/badge/Hard-red) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/trypwnme_two_challenge.md) |
 | 6 | [Matryoshka](https://tryhackme.com/room/matryoshka) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/matryoshka_challenge.md) |
 | 7 | [Kitty](https://tryhackme.com/room/kitty) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/kitty_challenge.md) |
 | 8 | [White Rabbit](https://tryhackme.com/room/whiterabbit) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
