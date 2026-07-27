@@ -115,7 +115,7 @@ The principal tools and utilities used during the challenge were:
 - cURL for manually testing SQL injection behaviour.
 - SQLMap for confirming and extracting data through blind SQL injection.
 
-Click [HERE](https://github.com/Valikahn/TryHackMe-Learn-Challenges#tools-commonly-used) to return to the repository README. The `Tools Commonly Used` section contains links to tools used throughout the pathway.
+Click [HERE](https://github.com/Valikahn/TryHackMe-Standalone-Challenge#tools-commonly-used) to return to the repository README. The `Tools Commonly Used` section contains links to tools used throughout the pathway.
 
 ## Initial Enumeration
 
