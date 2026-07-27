@@ -99,7 +99,6 @@ There is no promise that challenges will be completed in difficulty order, relea
 | 13 | [ExfilNode](https://tryhackme.com/room/exfilnode) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 14 | [Operation Endgame](https://tryhackme.com/room/operationendgame) | ![Hard](https://img.shields.io/badge/Hard-red) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/operation_endgame_challenge.md) |
 
-TryPwnMe One
 > [!NOTE]
 > New entries will be added when a challenge has been completed, reviewed, sanitised and prepared for publication. Repository activity may vary depending on study priorities and available time.
 
