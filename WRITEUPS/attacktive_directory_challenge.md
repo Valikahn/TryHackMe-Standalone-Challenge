@@ -63,20 +63,26 @@ The target was added to the Kali VM's local hosts file:
 echo "<TARGET_IP> spookysec.thm" | sudo tee -a /etc/hosts
 ```
 
-The mapping and VPN route were checked with:
+The mapping was confirmed with:
 
 ```bash
 getent hosts spookysec.thm
-ip route get <TARGET_IP>
-ip -br address show tun0
-ping -c 4 spookysec.thm
 ```
 
-The expected route showed traffic leaving through `tun0` using `<TUN0_IP>` as the source address:
+VPN routing and the tunnel address were also verified:
+
+```bash
+ip route get <TARGET_IP>
+ip -br address show tun0
+```
+
+The expected result showed traffic leaving through `tun0` and using `<TUN0_IP>` as the source address:
 
 ```text
 <TARGET_IP> via <REDACTED> dev tun0 src <TUN0_IP>
 ```
+
+This confirmed that traffic to the target was routed through `tun0` using `<TUN0_IP>`.
 
 > [!TIP]
 >
@@ -119,17 +125,6 @@ The principal tools and utilities used during the challenge were:
 Click [HERE](https://github.com/Valikahn/TryHackMe-Standalone-Challenge#tools-commonly-used) to return to the repository README. The `Tools Commonly Used` section contains links to tools used throughout the pathway.
 
 ## Initial Enumeration
-
-### Connectivity and Hostname Validation
-
-The local mapping was confirmed before enumeration:
-
-```bash
-getent hosts spookysec.thm
-ping -c 6 spookysec.thm
-```
-
-The target responded successfully, and the route confirmed that the traffic was passing through the TryHackMe VPN interface.
 
 ### Port and Service Discovery
 
