@@ -119,27 +119,6 @@ Click [HERE](https://github.com/Valikahn/TryHackMe-Standalone-Challenge#tools-co
 
 ## Initial Enumeration
 
-### Connectivity and Hostname Resolution
-
-The hostname mapping and VPN route were checked before interacting with the application:
-
-```bash
-getent hosts sqhell.thm
-ip route get <TARGET_IP>
-ip -br address show tun0
-ping -c 4 sqhell.thm
-```
-
-The output confirmed that:
-
-```text
-sqhell.thm -> <TARGET_IP>
-Route interface -> tun0
-Source address -> <TUN0_IP>
-```
-
-This ruled out local DNS and VPN routing problems before web enumeration began.
-
 ### Port and Service Discovery
 
 A rapid RustScan scan was performed:
