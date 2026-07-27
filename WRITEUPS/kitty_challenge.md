@@ -804,7 +804,7 @@ The central lesson was that two individually weak design choices became critical
 - Clean up temporary proof files after the authorised lab is complete.
 
 ## In Memory of Kitty
-> "This room is dedicated to the room creator's brother's cat, whose name was Kitty.
+> "This room is dedicated to the room creator's brother's cat, whose name was Kitty.  
 > Sadly, she passed away on 4 October 2022. She was part of our family for 13 years, and we miss her very much."
 >
 > ![Kitty1](./../IMAGES/kitty1_img.jpg?raw=true) ![Kitty2](./../IMAGES/kitty2_img.jpg?raw=true)
