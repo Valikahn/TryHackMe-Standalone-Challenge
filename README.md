@@ -3,7 +3,7 @@
 ![Banner](./IMAGES/standalone_challenges_img.png?raw=true)
 
 ![License](https://img.shields.io/badge/License-CC_BY_4.0-green)
-![Writeups](https://img.shields.io/badge/Published_Writeups-8-blue)
+![Writeups](https://img.shields.io/badge/Published_Writeups-7-blue)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/v4l1k4hn)
 ![GitHub User's stars](https://img.shields.io/github/stars/valikahn?style=flat&logo=github)
 ![Discord](https://img.shields.io/discord/521382216299839518?style=flat&logo=discord&color=purple)
@@ -91,14 +91,13 @@ There is no promise that challenges will be completed in difficulty order, relea
 | 5 | [TryPwnMe Two](https://tryhackme.com/room/trypwnmetwo) | ![Hard](https://img.shields.io/badge/Hard-red) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/trypwnme_two_challenge.md) |
 | 6 | [Matryoshka](https://tryhackme.com/room/matryoshka) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/matryoshka_challenge.md) |
 | 7 | [Kitty](https://tryhackme.com/room/kitty) | ![Medium](https://img.shields.io/badge/Medium-orange) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/kitty_challenge.md) |
-| 8 | [White Rabbit](https://tryhackme.com/room/whiterabbit) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
+| 8 | [Contrabando ](https://tryhackme.com/room/contrabando) | ![Hard](https://img.shields.io/badge/Hard-red) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/contrabando_challenge.md) |
 | 9 | [IronHold](https://tryhackme.com/room/ironhold) | ![Hard](https://img.shields.io/badge/Hard-red) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 10 | [Message to Garcia](https://tryhackme.com/room/messagetogarcia) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 11 | [Carrotbane of My Existence](https://tryhackme.com/room/sq3-aoc2025-bk3vvbcgiT) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 12 | [Volt Typhoon](https://tryhackme.com/room/volttyphoon) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 13 | [ExfilNode](https://tryhackme.com/room/exfilnode) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 14 | [Operation Endgame](https://tryhackme.com/room/operationendgame) | ![Hard](https://img.shields.io/badge/Hard-red) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/operation_endgame_challenge.md) |
-| 15 | [Contrabando ](https://tryhackme.com/room/contrabando) | ![Hard](https://img.shields.io/badge/Hard-red) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/contrabando_challenge.md) |
 
 > [!NOTE]
 > New entries will be added when a challenge has been completed, reviewed, sanitised and prepared for publication. Repository activity may vary depending on study priorities and available time.
