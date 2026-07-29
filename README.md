@@ -3,7 +3,7 @@
 ![Banner](./IMAGES/standalone_challenges_img.png?raw=true)
 
 ![License](https://img.shields.io/badge/License-CC_BY_4.0-green)
-![Writeups](https://img.shields.io/badge/Published_Writeups-7-blue)
+![Writeups](https://img.shields.io/badge/Published_Writeups-8-blue)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/v4l1k4hn)
 ![GitHub User's stars](https://img.shields.io/github/stars/valikahn?style=flat&logo=github)
 ![Discord](https://img.shields.io/discord/521382216299839518?style=flat&logo=discord&color=purple)
@@ -98,6 +98,7 @@ There is no promise that challenges will be completed in difficulty order, relea
 | 12 | [Volt Typhoon](https://tryhackme.com/room/volttyphoon) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 13 | [ExfilNode](https://tryhackme.com/room/exfilnode) | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Planned](https://img.shields.io/badge/Planned-lightgrey) |
 | 14 | [Operation Endgame](https://tryhackme.com/room/operationendgame) | ![Hard](https://img.shields.io/badge/Hard-red) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/operation_endgame_challenge.md) |
+| 15 | [Contrabando ](https://tryhackme.com/room/contrabando) | ![Hard](https://img.shields.io/badge/Hard-red) | [![Complete](https://img.shields.io/badge/Complete-brightgreen)](./WRITEUPS/contrabando_challenge.md) |
 
 > [!NOTE]
 > New entries will be added when a challenge has been completed, reviewed, sanitised and prepared for publication. Repository activity may vary depending on study priorities and available time.
